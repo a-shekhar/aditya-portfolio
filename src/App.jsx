@@ -7,6 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Input } from "@/components/ui/input";
+import SimpleIconLogo from '@/components/SimpleIconLogo';
+import ThemeToggle from '@/components/ThemeToggle';
+import Publications from '@/modules/Publications/Publications';
+import Certifications from '@/modules/Certifications/Certifications';
 
 const RESUME = {
   name: "Aditya Raj",
@@ -46,7 +50,7 @@ const RESUME = {
         "Established Azure DevOps multi‑stage CI/CD reducing manual release friction.",
         "Mentored new hires; coordinated a 4–6 engineer squad and worked with client architects."
       ],
-      stack: ["Databricks", "Spark", "Delta Lake", "Python", "SQL", "Azure", "ADF", "Synapse", "AKS", "Key Vault", "Azure DevOps"],
+      tech: ["Databricks", "Spark", "Delta Lake", "Python", "SQL", "Azure", "ADF", "Synapse", "AKS", "Key Vault", "Azure DevOps"],
     },
     {
       company: "Accenture",
@@ -60,10 +64,11 @@ const RESUME = {
         "Established unit testing and supported tech upgrades.",
         "Partnered with QA/BA & client stakeholders to harden releases."
       ],
-      stack: ["Java", "Spring", "Hibernate", "EJB", "JSF", "PrimeFaces", "Oracle SQL", "Git", "Maven"],
+      tech: ["Java", "Spring", "Hibernate", "EJB", "JSF", "PrimeFaces", "Oracle SQL", "Git", "Maven"],
     },
   ],
   projects: [
+
     {
       name: "Anjori Arts — E‑commerce Platform",
       year: "2025 – Present",
@@ -76,8 +81,25 @@ const RESUME = {
         "Admin: modern dashboards, optimistic updates, accessibility best practices."
       ],
       tech: ["React", "Vite", "Tailwind 4.x", "Spring Boot", "Cloudinary", "PostgreSQL", "Redis"],
-      link: "https://github.com/a-shekhar/anjori_arts_dev",
+      link: "https://www.anjoriarts.com",
     },
+    
+    {
+      name: "Currency Converter — Microservice",
+      year: "2024",
+      description: "Lightweight Spring Boot microservice that converts between currencies in real-time using exchange-rate API with caching.",
+      bullets: [
+        "Exposes REST endpoints: /convert?from=USD&to=INR&amount=100",
+        "In-memory and Redis cache with TTL to cut API calls by 90%",
+        "Circuit breaker + retry (resilience4j) and request tracing (SLF4J/MDC)",
+        "Containerized with Docker; CI on GitHub Actions; ready for Azure App Service"
+      ],
+      tech: ["Java", "Spring Boot", "Microservices", "API Gateway", "Docker", "Kubernetes",
+        "Load Balancer", "ZipKin", "Circuit Breaker"
+      ],
+      link: "https://github.com/a-shekhar/microservices-tutorial",
+    },
+
   ],
   awards: [
     { title: "SPOT Award", org: "Sigmoid", when: "Q2 2024" },
@@ -117,7 +139,8 @@ const Nav = () => {
     { href: "#projects", label: "Projects" },
     { href: "#skills", label: "Skills" },
     { href: "#awards", label: "Awards" },
-    { href: "#contact", label: "Contact" },
+    { href: "#certifications", label: "Certifications" },
+    { href: "#publications", label: "Publications" },
   ];
 
   return (
@@ -146,6 +169,7 @@ const Nav = () => {
                 <TooltipContent>Drop me a line</TooltipContent>
               </Tooltip>
             </TooltipProvider>
+            <ThemeToggle />
           </nav>
         </div>
       </div>
@@ -203,10 +227,10 @@ const Hero = () => {
                   <div className="absolute inset-0 rounded-3xl mix-blend-overlay opacity-40 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
                   <div className="absolute inset-6 grid grid-cols-2 gap-3">
                     {[
-                      { icon: <Code2 className="h-5 w-5" />, label: "Spring Boot" },
-                      { icon: <Database className="h-5 w-5" />, label: "Databricks" },
-                      { icon: <Cloud className="h-5 w-5" />, label: "Azure" },
-                      { icon: <ShieldCheck className="h-5 w-5" />, label: "RBAC/PII" },
+                      { icon: <SimpleIconLogo name="Java" className="h-5 w-5" />, label: "Java" },
+                      { icon: <SimpleIconLogo name="Spring Boot" className="h-5 w-5" />, label: "Spring Boot" },
+                      { icon: <SimpleIconLogo name="PostgreSQL" className="h-5 w-5" />, label: "Database" },
+                      { icon: <SimpleIconLogo name="Azure" className="h-5 w-5" />, label: "Azure" },
                     ].map((x, i) => (
                       <motion.div key={i} whileHover={{ y: -6 }} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-zinc-200">
                         <div className="mb-2 text-zinc-300">{x.icon}</div>
@@ -225,6 +249,8 @@ const Hero = () => {
 };
 
 const Experience = () => {
+  const items = Array.isArray(RESUME?.experience) ? RESUME.experience : [];
+
   return (
     <Section id="experience" className="py-20">
       <div className="mx-auto max-w-7xl px-4">
@@ -232,29 +258,40 @@ const Experience = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-white">Experience</h2>
           <p className="mt-2 text-zinc-400">Impact-first highlights across data platforms and backend systems.</p>
         </FadeIn>
+
         <div className="mt-10 grid gap-6">
-          {RESUME.experience.map((exp, idx) => (
-            <motion.div key={idx} initial={{ opacity: 0, x: idx % 2 ? 40 : -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          {items.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: idx % 2 ? 24 : -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <Card className="bg-zinc-900/60 border-white/10">
                 <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                   <div>
                     <CardTitle className="text-white flex items-center gap-2">
-                      <BriefcaseBusiness className="h-5 w-5 text-violet-400" /> {exp.role}
+                      <BriefcaseBusiness className="h-5 w-5 text-violet-400" /> {exp?.role}
                     </CardTitle>
                     <div className="mt-1 text-sm text-zinc-400 flex flex-wrap items-center gap-2">
-                      <Building2 className="h-4 w-4" /> {exp.company} • {exp.location} • {exp.dates}
+                      <Building2 className="h-4 w-4" /> {exp?.company} • {exp?.location} • {exp?.dates}
                     </div>
-                    <div className="mt-1 text-sm text-zinc-400">Client: {exp.client}</div>
+                    {exp?.client && (
+                      <div className="mt-1 text-sm text-zinc-400">Client: {exp.client}</div>
+                    )}
                   </div>
+
                   <div className="flex flex-wrap gap-2">
-                    {exp.stack.map((s) => (
+                    {(exp?.tech ?? exp?.stack ?? []).map((s) => (
                       <Badge key={s} className="bg-white/5 text-zinc-200 border-white/10">{s}</Badge>
                     ))}
                   </div>
                 </CardHeader>
+
                 <CardContent className="pt-0">
                   <ul className="grid gap-2 text-zinc-300 list-disc ml-6">
-                    {exp.bullets.map((b, i) => (
+                    {(exp?.bullets ?? []).map((b, i) => (
                       <li key={i}>{b}</li>
                     ))}
                   </ul>
@@ -267,6 +304,7 @@ const Experience = () => {
     </Section>
   );
 };
+
 
 const Projects = () => {
   const [query, setQuery] = useState("");
@@ -449,6 +487,33 @@ const Background = () => (
   </div>
 );
 
+
+// === Custom sections data ===
+const PUBLICATIONS = [
+  {
+    title: 'Techniques to Preserve the Location of Sink in Wireless Sensor Networks (WSN)',
+    outlet: 'IJARIIE',
+    link: 'http://ijariie.com/AdminUploadPdf/TECHNIQUES_TO_PRESERVE_THE_LOCATION_OF_SINK_IN_WIRELESS_SENSOR_NETWORKS__ijariie7726.pdf'
+  },
+  { title: 'Public Key Cryptography in WSN (RSA-based)', outlet: 'Paper Presentation (NIE, 2017)', link: '' }
+];
+
+const CERTIFICATIONS = [
+  { issuer: 'Microsoft', name: 'Azure Fundamentals', link: 'https://www.credly.com/badges/569af692-750b-4dc6-b84c-cbd98c22d3f9' },
+  { issuer: 'Microsoft', name: 'Azure AI Fundamentals', link: 'https://www.credly.com/badges/ccedf39b-9f33-412b-b8c0-1088abcfb4f9' },
+  { issuer: 'Microsoft', name: 'Azure Data Fundamentals', link: 'https://www.credly.com/badges/4604d0d6-0272-490d-8548-d1c41fb1a272' },
+  { issuer: 'Microsoft', name: 'Security, Compliance & Identity Fundamentals', link: 'https://www.credly.com/badges/234dca4d-e799-49e3-878f-0432229c192e' },
+  { issuer: 'Microsoft', name: 'Azure Data Engineer Associate', validity: 'Dec 2022 – Dec 2025', link: 'https://learn.microsoft.com/api/credentials/share/en-us/AdityaRaj-1058/92F058885A57FB4D?sharingId=86126B3B868073D9' },
+  { issuer: 'Snowflake', name: 'SnowPro Core Certification', validity: 'Aug 2022 – Aug 2026', link: 'https://www.credly.com/badges/e41b7e7e-4be1-4c7f-ab8c-ba638b97a06c' },
+  { issuer: 'Databricks', name: 'Academy Accreditation: Lakehouse Fundamentals', validity: 'Dec 2022 – Dec 2023', link: 'https://credentials.databricks.com/c17a7da4-3a65-4c00-b920-1d445f3b89fb' },
+  { issuer: 'Databricks', name: 'Databricks Certified Data Engineer Associate', validity: 'Dec 2024 – Dec 2026', link: 'https://credentials.databricks.com/62239252-4408-49bc-bc76-a37db4400722' },
+  { issuer: 'HackerRank', name: 'Java (Intermediate)', link: 'https://www.hackerrank.com/certificates/f7922f3c0c91' },
+  { issuer: 'HackerRank', name: 'SQL (Intermediate)', link: 'https://www.hackerrank.com/certificates/88e1e3b3faa3' },
+  { issuer: 'HackerRank', name: 'Java (Basic)', link: 'https://www.hackerrank.com/certificates/43ed66a6e44b' },
+  { issuer: 'HackerRank', name: 'SQL (Basic)', link: 'https://www.hackerrank.com/certificates/850a68ebbebc' },
+  { issuer: 'HackerRank', name: 'C++ (Basic)', link: 'https://www.hackerrank.com/certificates/899f86a52cf2' },
+  { issuer: 'HackerRank', name: 'Problem Solving (Basic)', link: 'https://www.hackerrank.com/certificates/7e748ccbe34c' },
+];
 export default function App() {
   return (
     <TooltipProvider>
@@ -465,10 +530,24 @@ export default function App() {
           <Skills />
           <Divider />
           <Awards />
+        </main>
+        
+          <Divider />
+          <section id="certifications" className="py-10">
+            <div className="mx-auto max-w-7xl px-4">
+              <Certifications items={CERTIFICATIONS} />
+            </div>
+          </section>
+          <Divider />
+          <section id="publications" className="py-20">
+            <div className="mx-auto max-w-7xl px-4">
+              <Publications items={PUBLICATIONS} />
+            </div>
+          </section>
           <Divider />
           <Contact />
-        </main>
-        <footer className="mt-20 border-t border-white/5 bg-zinc-950/60 backdrop-blur">
+          
+<footer className="mt-20 border-t border-white/5 bg-zinc-950/60 backdrop-blur">
           <div className="mx-auto max-w-7xl px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-sm text-zinc-500">© {new Date().getFullYear()} Aditya Raj • Built with React + Tailwind</div>
             <div className="flex items-center gap-3">
