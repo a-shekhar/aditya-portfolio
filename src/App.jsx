@@ -11,6 +11,8 @@ import SimpleIconLogo from '@/components/SimpleIconLogo';
 import ThemeToggle from '@/components/ThemeToggle';
 import Publications from '@/modules/Publications/Publications';
 import Certifications from '@/modules/Certifications';
+import HeroTechGrid from "@/components/skills/HeroTechGrid.jsx";
+
 
 const RESUME = {
   name: "Aditya Raj",
@@ -226,17 +228,7 @@ const Hero = () => {
                   <div className="absolute inset-0 rounded-3xl border border-white/10" />
                   <div className="absolute inset-0 rounded-3xl mix-blend-overlay opacity-40 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
                   <div className="absolute inset-6 grid grid-cols-2 gap-3">
-                    {[
-                      { icon: <SimpleIconLogo name="Java" className="h-5 w-5" />, label: "Java" },
-                      { icon: <SimpleIconLogo name="Spring Boot" className="h-5 w-5" />, label: "Spring Boot" },
-                      { icon: <SimpleIconLogo name="PostgreSQL" className="h-5 w-5" />, label: "Database" },
-                      { icon: <SimpleIconLogo name="Azure" className="h-5 w-5" />, label: "Azure" },
-                    ].map((x, i) => (
-                      <motion.div key={i} whileHover={{ y: -6 }} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-zinc-200">
-                        <div className="mb-2 text-zinc-300">{x.icon}</div>
-                        <div className="text-sm font-medium">{x.label}</div>
-                      </motion.div>
-                    ))}
+                    <HeroTechGrid />
                   </div>
                 </div>
               </motion.div>
