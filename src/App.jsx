@@ -37,6 +37,8 @@ import HeroTechGrid from "./components/skills/HeroTechGrid.jsx";
 import ResumeButton from "./components/ui/ResumeButton";
 import Contact from "./modules/Contact";
 import Background from "./components/ui/Background";
+import Skills from "./modules/Skills";
+
 
 
 const RESUME = {
@@ -52,60 +54,6 @@ const RESUME = {
   },
   summary:
     "SDE with 7+ years across Java/Spring Boot microservices and Spark/Databricks on Azure. Delivered outcomes for Conagra Brands (CPG) and PSCU (payments). Strengths in CDC architectures, governed analytics, PII protection (encryption/RBAC), and Azure DevOps CI/CD. Built Anjori Arts (React + Spring Boot) demonstrating end-to-end ownership.",
-  skills: [
-    {
-      group: "Back‑End",
-      items: [
-        "Java",
-        "Python",
-        "Spring Boot",
-        "Hibernate",
-        "REST APIs",
-        "Microservices",
-        "EJB",
-        "JUnit",
-        "Mockito",
-      ],
-    },
-    {
-      group: "Data",
-      items: [
-        "Apache Spark",
-        "Databricks",
-        "Delta Lake",
-        "CDC",
-        "Snowflake",
-        "Python",
-        "SQL",
-        "SQLFluff",
-      ],
-    },
-    { group: "Cloud", items: ["Azure", "GCP", "AWS"] },
-    { group: "Databases", items: ["PostgreSQL", "MySQL", "Oracle", "MongoDB"] },
-    {
-      group: "DevOps/Containers",
-      items: [
-        "Docker",
-        "Kubernetes",
-        "Git",
-        "Maven",
-        "SonarQube",
-        "Azure DevOps",
-      ],
-    },
-    {
-      group: "Frontend",
-      items: [
-        "React",
-        "Vite",
-        "Tailwind CSS",
-        "Thymeleaf",
-        "JSF",
-        "PrimeFaces",
-      ],
-    },
-    { group: "Caching & Messaging", items: ["Redis"] },
-  ],
   experience: [
     {
       company: "Sigmoid",
@@ -554,51 +502,6 @@ const Projects = () => {
   );
 };
 
-const Skills = () => {
-  return (
-    <Section id="skills" className="py-20">
-      <div className="mx-auto max-w-7xl px-4">
-        <FadeIn>
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Skills</h2>
-          <p className="mt-2 text-zinc-400">
-            Breadth where needed, depth where it matters.
-          </p>
-        </FadeIn>
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {RESUME.skills.map((s, i) => (
-            <motion.div
-              key={s.group}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-            >
-              <Card className="bg-zinc-900/60 border-white/10">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <ChevronRight className="h-5 w-5 text-cyan-300" /> {s.group}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="flex flex-wrap gap-2">
-                    {s.items.map((it) => (
-                      <Badge
-                        key={it}
-                        className="bg-white/5 text-zinc-200 border-white/10"
-                      >
-                        {it}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-};
 
 const Awards = () => (
   <Section id="awards" className="py-20">
