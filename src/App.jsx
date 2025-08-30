@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail, MapPin, Phone, ExternalLink, Rocket, Award, BriefcaseBusiness, Code2, Database, Cloud, ShieldCheck, Sparkles, ChevronRight, Building2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { Input } from "@/components/ui/input";
-import SimpleIconLogo from '@/components/SimpleIconLogo';
-import ThemeToggle from '@/components/ThemeToggle';
-import Publications from '@/modules/Publications/Publications';
-import Certifications from '@/modules/Certifications';
-import HeroTechGrid from "@/components/skills/HeroTechGrid.jsx";
+import { Button } from "./components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
+import { Badge } from "./components/ui/badge";
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "./components/ui/tooltip";
+import { Input } from "./components/ui/input";
+import SimpleIconLogo from './components/SimpleIconLogo';
+import ThemeToggle from './components/ThemeToggle';
+import Publications from './modules/Publications/Publications';
+import Certifications from './modules/Certifications';
+import HeroTechGrid from "./components/skills/HeroTechGrid.jsx";
 
 
 const RESUME = {
@@ -480,16 +480,6 @@ const Background = () => (
 );
 
 
-// === Custom sections data ===
-const PUBLICATIONS = [
-  {
-    title: 'Techniques to Preserve the Location of Sink in Wireless Sensor Networks (WSN)',
-    outlet: 'IJARIIE',
-    link: 'http://ijariie.com/AdminUploadPdf/TECHNIQUES_TO_PRESERVE_THE_LOCATION_OF_SINK_IN_WIRELESS_SENSOR_NETWORKS__ijariie7726.pdf'
-  },
-  { title: 'Public Key Cryptography in WSN (RSA-based)', outlet: 'Paper Presentation (NIE, 2017)', link: '' }
-];
-
 
 export default function App() {
   return (
@@ -512,11 +502,7 @@ export default function App() {
           <Divider />
           <Certifications />
           <Divider />
-          <section id="publications" className="py-20">
-            <div className="mx-auto max-w-7xl px-4">
-              <Publications items={PUBLICATIONS} />
-            </div>
-          </section>
+          <Publications />
           <Divider />
           <Contact />
           
